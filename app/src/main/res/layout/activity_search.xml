@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.search.SearchActivity">
+
+    <TextView
+        android:id="@+id/intro_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="@string/search_title"
+        />
+
+    <TextView
+        android:id="@+id/title_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/intro_txt"
+        android:text="@string/title_header"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/title_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_header"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:hint="@string/title_hint"
+        android:inputType="text"
+        android:padding="1dp" />
+
+    <LinearLayout
+        android:id="@+id/genre_mpaa"
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title_search"
+        android:layout_marginTop="-5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/genre"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/genre_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/genre_header"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/genres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textStyle="normal"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mpaa_rating"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mpaa_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/mpaa_header"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/mpaas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textStyle="normal"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/keyword_actor_director"
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/genre_mpaa"
+        android:layout_marginTop="-5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/keyword"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/keyword_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/keyword_header"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/keyword_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:hint="@string/keyword_hint"
+                android:inputType="text"
+                android:padding="1dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/actor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/actor_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/actor_header"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/actor_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:hint="@string/actor_hint"
+                android:inputType="text"
+                android:padding="1dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/director"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/director_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/director_header"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/director_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:hint="@string/director_hint"
+                android:inputType="text"
+                android:padding="1dp"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/made_rating"
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/keyword_actor_director"
+        android:layout_marginTop="-5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/before_after"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/year_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/year_header"
+                android:textStyle="normal"/>
+
+            <RadioGroup
+                android:id="@+id/radio_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/before"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/before_radio_btn"
+                    android:checked="true"
+                    android:textStyle="normal"
+                    android:onClick="searchDatabase"/>
+
+                <RadioButton
+                    android:id="@+id/after"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/after_radio_btn"
+                    android:checked="true"
+                    android:textStyle="normal"
+                    android:onClick="searchDatabase"/>
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/year_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:hint="@string/year_hint"
+                android:inputType="text"
+                android:padding="1dp" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rating"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/rating_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="42dp"
+                android:text="@string/rating_header"
+                android:textStyle="normal"/>
+
+            <EditText
+                android:id="@+id/rating_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:hint="@string/rating_hint"
+                android:inputType="text"
+                android:padding="1dp"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/made_rating"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-5dp">
+
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/search_label"
+            android:onClick="searchBtnClick"
+            android:layout_margin="5dp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_centerInParent="true"
+        android:drawableTop="@drawable/lb_ic_sad_cloud"
+        android:text="@string/error_message"
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

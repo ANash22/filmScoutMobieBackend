@@ -1,0 +1,36 @@
+<resources>
+    <string name="enter_rating">Enter</string>
+    <string name="app_name">FilmScout</string>
+    <string name="overview">Overview</string>
+    <string name="error_message">Error Loading Results</string>
+    <string name="duration_header">Duration</string>
+    <string name="language_header">Language</string>
+    <string name="date_header">Release Date</string>
+    <string name="mpaa_rating_header">Rating</string>
+    <string name="cast_header">Cast</string>
+    <string name="crew_header">Crew</string>
+    <string name="trailer_header">Trailer</string>
+    <string name="rating_btn">Rate It</string>
+    <string name="watched_btn">Seen It</string>
+    <string name="will_watch_btn">Must Watch</string>
+    <string name="search_results">Search Results</string>
+    <string name="search_title">I Want A Movie That\'s A…</string>
+    <string name="title_header">Title</string>
+    <string name="genre_header">Genres</string>
+    <string name="mpaa_header">With an MPAA Rating…</string>
+    <string name="keyword_header">About…</string>
+    <string name="actor_header">Starring…</string>
+    <string name="director_header">Directed By…</string>
+    <string name="year_header">Made</string>
+    <string name="before_radio_btn">Before</string>
+    <string name="after_radio_btn">After</string>
+    <string name="rating_header">Popularity</string>
+    <string name="title_hint">title…</string>
+    <string name="keyword_hint">keyword…</string>
+    <string name="actor_hint">actor…</string>
+    <string name="director_hint">director…</string>
+    <string name="year_hint">year…</string>
+    <string name="rating_hint">rating…</string>
+    <string name="search_label">Search</string>
+    <plurals name="duration" />
+</resources>
