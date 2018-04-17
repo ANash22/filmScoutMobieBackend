@@ -3,6 +3,7 @@ package com.filmscout.nasha.filmscout.app.results;
 import com.filmscout.nasha.filmscout.Config;
 import com.filmscout.nasha.filmscout.api.MovieApiService;
 import com.filmscout.nasha.filmscout.api.models.ImageConfiguration;
+import com.filmscout.nasha.filmscout.api.models.MovieDetails;
 import com.filmscout.nasha.filmscout.api.models.MovieResponse;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public class ResultsPresenter implements ResultsContract.Presenter {
     private String genre;
     private List<String> keywords;
     private ImageConfiguration configuration;
+    private MovieResponse movieResponse;
+    private MovieDetails movieDetails;
 
     @Inject
     ResultsPresenter(ResultsContract.View view, MovieApiService apiService){
@@ -38,9 +41,12 @@ public class ResultsPresenter implements ResultsContract.Presenter {
     }
 
     @Override
-    public void start(){
+    public void start(String apiKey, String certification,
+                      String primaryReleaseGTE, String primaryReleaseLTE, Double voteAverage,
+                      String cast, String crew, String genre, List<String> keywords, boolean isRefresh){
         view.showLoading(false);
-        getSearchResults(true);
+        getSearchResults(apiKey, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords, true);
         getConfiguration();
     }
 
@@ -65,24 +71,29 @@ public class ResultsPresenter implements ResultsContract.Presenter {
     public void onPullToRefresh(){
         page = 1;
         view.showLoading(true);
-        getSearchResults(true);
+        getSearchResults(apiKey, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords, true);
     }
 
     @Override
     public void onScrollToEnd(){
         page++;
         view.showLoading(true);
-        getSearchResults(false);
+        getSearchResults(apiKey, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords, false );
     }
 
-    private void getSearchResults(final boolean isRefresh){
-        Call<MovieResponse> call = apiService.getSearchResults(apiKey,certification, page,
+    private void getSearchResults(String apiKey, String certification,
+                                  String primaryReleaseGTE, String primaryReleaseLTE, Double voteAverage,
+                                  String cast, String crew, String genre, List<String> keywords, boolean isRefresh){
+        Call<MovieResponse> call = apiService.getSearchResults(apiKey,certification,
                 primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords);
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if(response.isSuccessful()){
                     view.showContent(response.body().results, isRefresh);
+
                 }
                 else{
                     view.showError();

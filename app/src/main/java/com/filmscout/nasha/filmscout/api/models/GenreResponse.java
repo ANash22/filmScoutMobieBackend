@@ -10,12 +10,12 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "certifications"
+        "genres"
 })
 
-public class CertificationResponse {
+public class GenreResponse {
 
-    @JsonProperty("certifications")
-    public List<Certification> certifications = null;
+    @JsonProperty("genres")
+    public List<Genre> genres = null;
 
 }

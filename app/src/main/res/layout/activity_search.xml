@@ -60,7 +60,7 @@
                 android:text="@string/genre_header"
                 android:textStyle="bold" />
 
-            <TextView
+            <ListView
                 android:id="@+id/genres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:text="@string/mpaa_header"
                 android:textStyle="bold"/>
 
-            <TextView
+            <ListView
                 android:id="@+id/mpaas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -235,7 +235,7 @@
                     android:text="@string/before_radio_btn"
                     android:checked="true"
                     android:textStyle="normal"
-                    android:onClick="searchDatabase"/>
+                    />
 
                 <RadioButton
                     android:id="@+id/after"
@@ -244,7 +244,7 @@
                     android:text="@string/after_radio_btn"
                     android:checked="true"
                     android:textStyle="normal"
-                    android:onClick="searchDatabase"/>
+                    />
 
             </RadioGroup>
 

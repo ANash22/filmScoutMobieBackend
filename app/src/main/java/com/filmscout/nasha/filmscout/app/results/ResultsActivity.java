@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.filmscout.nasha.filmscout.Config;
 import com.filmscout.nasha.filmscout.R;
 import com.filmscout.nasha.filmscout.api.models.Images;
 import com.filmscout.nasha.filmscout.api.models.Movie;
@@ -31,16 +32,18 @@ public class ResultsActivity extends AppCompatActivity implements
         EndlessScrollListener.ScrollToEndListener,
         ResultsAdapter.ItemClickListener {
 
-    public static final String TAG = "Results";
+    //public static final String TAG = "Results";
     public static final String CERTIFICATION = "certification";
     public static final String PRIMARY_RELEASE_GTE = "primary_release_gte";
     public static final String PRIMARY_RELEASE_LTE = "primary_release_lte";
-    public static final String VOTE_AVERAGE = "vote_average";
+    //public static final Double VOTE_AVERAGE ; just do intent.putExtra("vote-average", vote);
+    //Double voteAverage = intent.getDouble("vote-average")
     public static final String CAST = "cast";
     public static final String CREW = "crew";
     public static final String GENRE = "genre";
     public static final String  KEYWORDS = "keywords";
     public static final String TITLE = "title";
+
 
     @Inject
     ResultsPresenter presenter;
@@ -57,6 +60,19 @@ public class ResultsActivity extends AppCompatActivity implements
     private ResultsAdapter resultsAdapter;
     private EndlessScrollListener endlessScrollListener;
     private Images images;
+    private String apiKey = Config.API_KEY_URL;
+
+    private int page = 1;
+    private String certification;
+    private String primaryReleaseGTE;
+    private String primaryReleaseLTE;
+    private Double voteAverage;
+    private String cast;
+    private String crew;
+    private String genre;
+    private List<String> keywords;
+    private Boolean isRefresh;
+    private String movieTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +86,27 @@ public class ResultsActivity extends AppCompatActivity implements
                 .resultsModule(new ResultsModule(this))
                 .build()
                 .inject(this);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras!= null){
+            if(extras.getString(PRIMARY_RELEASE_LTE ) != null){
+                primaryReleaseLTE = extras.getString(PRIMARY_RELEASE_LTE);
+            }
+            else{
+                primaryReleaseGTE = extras.getString(PRIMARY_RELEASE_GTE);
+            }
+            movieTitle = extras.getString(MOVIE_TITLE);
+            certification = extras.getString(CERTIFICATION);
+            voteAverage = extras.getDouble("vote_average");
+            cast = extras.getString(CAST);
+            crew = extras.getString(CREW);
+            keywords = extras.getStringArrayList(KEYWORDS);
+            //genre = extras.get
+
+
+
+
+        }
     }
 
     private void setupContentView(){
@@ -96,7 +133,8 @@ public class ResultsActivity extends AppCompatActivity implements
     @Override
     protected void onStart(){
         super.onStart();
-        presenter.start();
+        presenter.start(apiKey, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords, isRefresh);
     }
 
     @Override
@@ -163,6 +201,7 @@ public class ResultsActivity extends AppCompatActivity implements
 
     @OnClick(R.id.error)
     void onClickErrorView(){
-        presenter.start();
+        presenter.start(apiKey, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords, isRefresh);
     }
 }

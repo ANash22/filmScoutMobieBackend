@@ -7,6 +7,10 @@ import com.filmscout.nasha.filmscout.api.models.ImageConfiguration;
 import com.filmscout.nasha.filmscout.api.models.Images;
 import com.filmscout.nasha.filmscout.api.models.Movie;
 import com.filmscout.nasha.filmscout.api.models.MovieDetails;
+import com.filmscout.nasha.filmscout.api.models.Video;
+import com.filmscout.nasha.filmscout.api.models.VideoResponse;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -21,6 +25,7 @@ public class DetailsPresenter implements DetailsContract.Presenter {
     private String apiKey = Config.API_KEY_URL;
 
     private Images images;
+    private List<Video> videos;
 
     @Inject
     DetailsPresenter(DetailsContract.View view, MovieApiService apiService){
@@ -64,6 +69,9 @@ public class DetailsPresenter implements DetailsContract.Presenter {
             @Override
             public void onResponse(Call<MovieDetails> call, Response<MovieDetails> response) {
                 if(response.isSuccessful()) {
+                    if(response.body().video == true){
+                        getTrailer(movieId);
+                    }
                     view.showContent(response.body());
                 }
                 else{
@@ -78,6 +86,25 @@ public class DetailsPresenter implements DetailsContract.Presenter {
 
             }
         });
+    }
+
+    private void getTrailer(int movieId){
+        Call<VideoResponse> trailer = apiService.getMovieVideos(movieId, apiKey);
+        trailer.enqueue(new Callback<VideoResponse>() {
+            @Override
+            public void onResponse(Call<VideoResponse> call, Response<VideoResponse> response) {
+                if(response.isSuccessful()){
+                    videos = response.body().results;
+                    view.setTrailer(videos);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VideoResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 
     @Override

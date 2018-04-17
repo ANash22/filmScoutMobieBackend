@@ -5,11 +5,22 @@ import android.widget.ArrayAdapter;
 
 import com.filmscout.nasha.filmscout.R;
 import com.filmscout.nasha.filmscout.api.models.SelectData;
+import com.filmscout.nasha.filmscout.app.AppScope;
+import com.filmscout.nasha.filmscout.app.ApplicationComponent;
 
-public class SearchComponent extends ListActivity {
+import dagger.Component;
 
-    String[] genres = getResources().getStringArray(R.array.genres);
-    String[] ratings = getResources().getStringArray(R.array.mpaa_ratings);
+
+@AppScope
+@Component(
+        dependencies = ApplicationComponent.class,
+        modules = SearchModule.class
+)
+
+interface SearchComponent {
+
+    void inject (SearchActivity SearchActivity);
+
 
 
 

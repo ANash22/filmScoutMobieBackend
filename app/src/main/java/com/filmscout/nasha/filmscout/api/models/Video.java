@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Video {
 
     @JsonProperty("id")
-    public Integer id;
+    public String id;
 
     @JsonProperty("iso_639_1")
     public String iso6391;

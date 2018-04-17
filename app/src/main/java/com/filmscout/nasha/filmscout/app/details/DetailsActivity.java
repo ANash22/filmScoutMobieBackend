@@ -25,8 +25,11 @@ import com.filmscout.nasha.filmscout.api.models.Genre;
 import com.filmscout.nasha.filmscout.api.models.Images;
 import com.filmscout.nasha.filmscout.api.models.Movie;
 import com.filmscout.nasha.filmscout.api.models.MovieDetails;
+import com.filmscout.nasha.filmscout.api.models.Video;
 import com.filmscout.nasha.filmscout.app.App;
 import com.filmscout.nasha.filmscout.app.search.SearchActivity;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -105,6 +108,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
     private int movieId = -1;
     private Images images;
     private MovieDetails mDetails;
+    private List<Video> videos;
 
 
 
@@ -172,7 +176,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
         crewTextView.setText(getCrew(creditsResponse));
         trailerView.getSettings().setJavaScriptEnabled(true);
         trailerView.getSettings().setLoadsImagesAutomatically(true);
-        trailerView.loadUrl("https://www.youtube.com/embed/");
+        trailerView.loadUrl("https://www.youtube.com/embed/" + getTrailerUrl());
         trailerView.setWebChromeClient(new WebChromeClient());
 
         loadingView.setVisibility(View.GONE);
@@ -262,6 +266,21 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
     }
 
     @NonNull
+    private String getTrailerUrl(){
+        String v = "";
+        Integer movieId = 0;
+        if(videos != null){
+            for(int i = 0; i < videos.size(); i++){
+                Video video = videos.get(i);
+                v = video.key;
+
+            }
+        }
+        return v;
+
+    }
+
+    @NonNull
     private String removeTrailingComma(String text){
         text = text.trim();
         if(text.endsWith(",")){
@@ -283,6 +302,11 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
     @Override
     public void onConfigurationSet(Images images){
         this.images = images;
+    }
+
+    @Override
+    public void setTrailer(List<Video> videos){
+        this.videos = videos;
     }
 
     private void showContent(boolean show){

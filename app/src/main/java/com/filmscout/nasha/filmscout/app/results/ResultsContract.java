@@ -22,7 +22,9 @@ public interface ResultsContract {
 
     interface Presenter {
 
-        void start();
+        void start(String apiKey, String certification,
+                   String primaryReleaseGTE, String primaryReleaseLTE, Double voteAverage,
+                   String cast, String crew, String genre, List<String> keywords, boolean isRefresh);
 
         void onPullToRefresh();
 

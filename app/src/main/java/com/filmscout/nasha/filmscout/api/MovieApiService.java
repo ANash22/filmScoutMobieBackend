@@ -1,7 +1,9 @@
 package com.filmscout.nasha.filmscout.api;
 
+import com.filmscout.nasha.filmscout.api.models.Certification;
 import com.filmscout.nasha.filmscout.api.models.CertificationResponse;
 import com.filmscout.nasha.filmscout.api.models.Genre;
+import com.filmscout.nasha.filmscout.api.models.GenreResponse;
 import com.filmscout.nasha.filmscout.api.models.ImageConfiguration;
 import com.filmscout.nasha.filmscout.api.models.Movie;
 import com.filmscout.nasha.filmscout.api.models.MovieDetails;
@@ -38,7 +40,6 @@ public interface MovieApiService {
     Call<MovieResponse> getSearchResults(
             @Query("api_key") String apiKey,
             @Query("certification") String certification,
-            @Query("page") int page,
             @Query("primary_release_date.gte") String primaryReleaseGTE,
             @Query("primary_release_date.lte") String primaryReleaseLTE,
             @Query("vote_average.gte") Double voteAverage,
@@ -61,7 +62,7 @@ public interface MovieApiService {
     );
 
     @GET(ApiModule.GENRE)
-    Call<Genre> getGenres(
+    Call<GenreResponse> getGenres(
             @Query("api_key") String apiKey
     );
 
