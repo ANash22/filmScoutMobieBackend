@@ -44,7 +44,8 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
                                          int viewType){
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_card, parent, false);
-        return new ViewHolder(itemView);
+        ViewHolder vh = new ViewHolder(itemView);
+        return vh;
     }
 
     @Override
@@ -110,7 +111,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
         this.images = images;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+  public static class ViewHolder extends RecyclerView.ViewHolder{
 
         View itemView;
         @BindView(R.id.poster)

@@ -70,7 +70,7 @@ public class ResultsActivity extends AppCompatActivity implements
     private String cast;
     private String crew;
     private String genre;
-    private List<String> keywords;
+    private String keywords;
     private Boolean isRefresh;
     private String movieTitle;
 
@@ -100,7 +100,8 @@ public class ResultsActivity extends AppCompatActivity implements
             voteAverage = extras.getDouble("vote_average");
             cast = extras.getString(CAST);
             crew = extras.getString(CREW);
-            keywords = extras.getStringArrayList(KEYWORDS);
+            keywords = extras.getString(KEYWORDS);
+
             //genre = extras.get
 
 
@@ -112,7 +113,7 @@ public class ResultsActivity extends AppCompatActivity implements
     private void setupContentView(){
         swipeRefreshLayout.setOnRefreshListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager
-                (this, LinearLayoutManager.HORIZONTAL, false);
+                (this);
         endlessScrollListener = new EndlessScrollListener(layoutManager, this);
         contentView.setLayoutManager(layoutManager);
         contentView.addOnScrollListener(endlessScrollListener);
@@ -122,19 +123,21 @@ public class ResultsActivity extends AppCompatActivity implements
     @Override
     public  void onRefresh(){
         endlessScrollListener.onRefresh();
-        presenter.onPullToRefresh();
+        presenter.onPullToRefresh(apiKey, movieTitle, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords);
     }
 
     @Override
     public void onScrollToEnd(){
-        presenter.onScrollToEnd();
+        presenter.onScrollToEnd(apiKey, movieTitle, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-        presenter.start(apiKey, certification,
-                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords, isRefresh);
+        presenter.start(apiKey, movieTitle, certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords);
     }
 
     @Override
@@ -153,17 +156,16 @@ public class ResultsActivity extends AppCompatActivity implements
 
     @Override
     public void showContent(List<Movie> movies, boolean isRefresh){
-        if(resultsAdapter == null){
-            resultsAdapter = new ResultsAdapter(movies, this, images, this);
-            contentView.setAdapter(resultsAdapter);
+
+        resultsAdapter = new ResultsAdapter(movies, this, images, this);
+        contentView.setAdapter(resultsAdapter);
+        resultsAdapter.addAll(movies);
+        resultsAdapter.notifyDataSetChanged();
+        if (isRefresh){
+            resultsAdapter.clear();
         }
-        else {
-            if(isRefresh){
-                resultsAdapter.clear();
-            }
-            resultsAdapter.addAll(movies);
-            resultsAdapter.notifyDataSetChanged();
-        }
+
+
 
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
@@ -201,7 +203,7 @@ public class ResultsActivity extends AppCompatActivity implements
 
     @OnClick(R.id.error)
     void onClickErrorView(){
-        presenter.start(apiKey, certification,
-                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords, isRefresh);
+        presenter.start(apiKey, movieTitle,certification,
+                primaryReleaseGTE, primaryReleaseLTE, voteAverage, cast, crew, genre, keywords);
     }
 }

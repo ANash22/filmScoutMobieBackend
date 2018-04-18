@@ -22,13 +22,17 @@ public interface ResultsContract {
 
     interface Presenter {
 
-        void start(String apiKey, String certification,
+        void start(String apiKey, String title, String certification,
                    String primaryReleaseGTE, String primaryReleaseLTE, Double voteAverage,
-                   String cast, String crew, String genre, List<String> keywords, boolean isRefresh);
+                   String cast, String crew, String genre, String keywords);
 
-        void onPullToRefresh();
+        void onPullToRefresh(String apiKey, String title, String certification,
+                             String primaryReleaseGTE, String primaryReleaseLTE, Double voteAverage,
+                             String cast, String crew, String genre, String keywords);
 
-        void onScrollToEnd();
+        void onScrollToEnd(String apiKey, String title, String certification,
+                           String primaryReleaseGTE, String primaryReleaseLTE, Double voteAverage,
+                           String cast, String crew, String genre, String keywords);
 
         void finish();
     }

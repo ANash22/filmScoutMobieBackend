@@ -68,6 +68,6 @@ public class Movie {
     public String overview;
 
     @JsonProperty("release_date")
-    public String releaseData;
+    public String releaseDate;
 
 }

@@ -3,6 +3,7 @@ package com.filmscout.nasha.filmscout.api;
 import android.app.Application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.filmscout.nasha.filmscout.Config;
 import com.filmscout.nasha.filmscout.api.Converter.EnumConverter;
 import com.filmscout.nasha.filmscout.app.AppScope;
 
@@ -29,12 +30,25 @@ public class ApiModule {
     public static final String POSTER_URL = "http://image.tmdb.org/t/p/w600/";
     public static final String API_URL = "https://api.themoviedb.org/3/";
     public static final String MOVIE = "movie/";
-    public static final String DISCOVER = "discover/movie/";
-    public static final String SEARCH_MOVIE = "search/movie/";
+    public static final String DISCOVER = "discover/movie";
+    public static final String SEARCH_MOVIE = "search/movie";
     public static final String MPAA_RATING = "certification/movie/list";
     public static final String GENRE = "genre/movie/list";
     public static final String PERSON = "person/";
-    public static final String CONFIGURATION = "configuration/";
+    public static final String CONFIGURATION = "configuration";
+    public static final String PEOPLE = "search/person";
+    public static final String KEYWORD = "search/keyword";
+    public static final String LANGUAGE = "language=en-US";
+    public static final String COUNTRY = "en-us";
+    public static final String ADULT = "include_adult=false";
+    public static final String POPULARITY = "sort_by=popularity.desc";
+    public static final String PAGE = "page=1";
+
+    public static final String DISCOVER_URL = API_URL + DISCOVER + "?"
+            + Config.API_KEY_URL + "&" + LANGUAGE + "&"
+            + POPULARITY + "&" + COUNTRY + "&" + ADULT + "&" + PAGE;
+
+
 
     @Provides
     @Singleton

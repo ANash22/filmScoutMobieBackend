@@ -19,6 +19,7 @@ import com.filmscout.nasha.filmscout.api.models.Certification;
 import com.filmscout.nasha.filmscout.api.models.Genre;
 import com.filmscout.nasha.filmscout.api.models.GenreResponse;
 import com.filmscout.nasha.filmscout.app.App;
+import com.filmscout.nasha.filmscout.app.details.DetailsActivity;
 import com.filmscout.nasha.filmscout.app.results.ResultsActivity;
 import com.google.common.collect.ArrayListMultimap;
 
@@ -32,6 +33,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 import static com.filmscout.nasha.filmscout.app.results.ResultsActivity.CAST;
 import static com.filmscout.nasha.filmscout.app.results.ResultsActivity.CREW;
@@ -250,11 +252,13 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         EditText directorText = findViewById(R.id.director_search);
         String director = directorText.getText().toString();
         EditText keywordText = findViewById(R.id.keyword_search);
-        String keyword = keywordText.getText().toString();
+        String keyword = parseString(keywordText.getText().toString());
         EditText yearTxt = findViewById(R.id.year_search);
         String year = yearTxt.getText().toString();
         EditText ratingTxt = findViewById(R.id.rating_search);
-        Double rating = Double.valueOf(ratingTxt.getText().toString());
+        Double rating = parseDouble(ratingTxt.getText().toString());
+
+
         //TextView certTxt = (TextView) findViewById(R.id.mpaas)
         //String certification = certTxt.getText.toString()
         //TextView genreText = (TextView) findViewbyId(R.id.genres)
@@ -288,5 +292,23 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             i.putExtra(CERTIFICATION,)
 
         }**/
+    }
+
+    public double parseDouble(String strNumber){
+        if(strNumber != null && strNumber.length() > 0){
+            try{
+                return Double.parseDouble(strNumber);
+            }catch (Exception e){
+                return -1;
+            }
+        }
+        else return 0;
+    }
+
+    public String parseString(String string){
+        if(string != null && string.length() > 0){
+            return string;
+        }
+        else return "";
     }
 }
